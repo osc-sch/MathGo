@@ -10,3 +10,18 @@ main{
 #rangoImg{
     width: 20%;
 }
+
+.card{
+    transition: all 0.5s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+    transition: all 0.5s;
+    border-bottom: solid 5px #2980b9;
+}
+
+#contenedorPrincipal{
+    margin-left: 220px;
+    box-sizing: border-box;
+}
