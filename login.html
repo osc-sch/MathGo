@@ -15,7 +15,7 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="assets/css/loginEstudiantes.css" />
+    <link rel="stylesheet" href="assets/css/login.css" />
   </head>
   <body>
     <div
@@ -33,25 +33,6 @@
           />
         </div>
         <h2 class="text-center mb-4">Bienvenido a MathGo</h2>
-        <p class="mb-2">Ingresás como:</p>
-        <div class="d-flex gap-2 mb-3">
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="btnEstudiante"
-            onclick="seleccionarRol('estudiante')"
-          >
-            <i class="bi bi-mortarboard"></i>Estudiante
-          </button>
-          <button
-            type="button"
-            class="btn btn-warning"
-            id="btnDocente"
-            onclick="seleccionarRol('docente')"
-          >
-            <i class="bi bi-person-rolodex"></i>Docente
-          </button>
-        </div>
         <div class="mb-3">
           <label for="correo" class="form-label">Correo Electrónico</label>
           <input
@@ -63,22 +44,22 @@
         </div>
         <div class="mb-3">
           <label for="contraseña" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            id="contraseña"
-            class="form-control"
-            placeholder="Contraseña"
-          />
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            onclick="togglePassword()"
-          >
-            <i class="bi bi-eye-fill" id="eyeIcon"></i>
-          </button>
-        </div>
-        <div class="text-end mb-3">
-          <a href="" class="text-decoration-none">¿Olvidaste tu Contraseña?</a>
+          <div class="input-group">
+            <input
+              type="password"
+              id="contraseña"
+              class="form-control"
+              placeholder="Contraseña"
+            />
+
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              onclick="togglePassword()"
+            >
+              <i class="bi bi-eye-fill" id="eyeIcon"></i>
+            </button>
+          </div>
         </div>
         <button
           type="button"
@@ -94,8 +75,7 @@
         </div>
       </div>
     </div>
-
-    <script src="assets/js/loginEstudiante.js"></script>
+    <script src="assets/js/login.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
