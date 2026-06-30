@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MathGo - Desafíos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        :root {
+            --mg-purple: #6f42c1;
+            --mg-purple-dark: #4b2a91;
+            --mg-blue: #0d6efd;
+            --mg-yellow: #ffc107;
+            --mg-bg: #f0ebff;
+            --mg-card: #ffffff;
+        }
+
+        body {
+            background-color: var(--mg-bg);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: linear-gradient(135deg, var(--mg-purple-dark), var(--mg-purple));
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+        }
+
+        .navbar-brand img {
+            width: 38px;
+        }
+
+        .navbar-brand span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, .85) !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #fff !important;
+        }
+
+        .nav-link .bi {
+            font-size: 1.1rem;
+            margin-right: 4px;
+        }
+
+        /* ── HERO REDUCIDO ── */
+        .hero-desafios {
+            background: linear-gradient(135deg, var(--mg-purple-dark) 0%, var(--mg-purple) 60%, #9c6fe4 100%);
+            color: #fff;
+            padding: 2rem 1.5rem;
+            border-radius: 0 0 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-desafios::after {
+            content: '🎯 🏆';
+            position: absolute;
+            right: 2rem;
+            top: 1.5rem;
+            font-size: 2.5rem;
+            opacity: .15;
+        }
+
+        .hero-desafios h2 {
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+
+        /* ── SECCIÓN ── */
+        .section-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--mg-purple-dark);
+            border-left: 4px solid var(--mg-purple);
+            padding-left: .6rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ── CARDS DE TEMAS ── */
+        .tema-card {
+            background: var(--mg-card);
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, .08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .tema-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(111, 66, 193, .15);
+        }
+
+        .btn-mg {
+            background: var(--mg-purple);
+            color: #fff;
+            border: none;
+            border-radius: .6rem;
+            font-weight: 600;
+            font-size: .85rem;
+        }
+
+        .btn-mg:hover {
+            background: var(--mg-purple-dark);
+            color: #fff;
+        }
+
+        /* ── CORRECCIÓN DE CONTRASTE EN BADGES ── */
+        .badge-facil {
+            background-color: #e0cffc !important;
+            color: #4b2a91 !important;
+            border: 1px solid #b99af8;
+        }
+
+        .badge-intermedio {
+            background-color: #fff3cd !important;
+            color: #856404 !important;
+            border: 1px solid #ffeeba;
+        }
+
+        .badge-avanzado {
+            background-color: #f8d7da !important;
+            color: #721c24 !important;
+            border: 1px solid #f5c6cb;
+        }
+
+        .badge-modos {
+            background-color: #e2e3e5 !important;
+            color: #383d41 !important;
+            border: 1px solid #d6d8db;
+        }
+
+        /* Estilos Modales y Pestañas */
+        .modal-content {
+            border-radius: 1.2rem;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--mg-purple-dark), var(--mg-purple));
+            color: #fff;
+            border-radius: 1.2rem 1.2rem 0 0;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        /* Personalización de los Tabs dentro del modal */
+        .nav-tabs .nav-link {
+            color: #6c757d;
+            font-weight: 600;
+            border: none;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--mg-purple);
+            border-bottom: 3px solid var(--mg-purple);
+            background: none;
+        }
+
+        .item-desafio {
+            background: #f8f6ff;
+            border-radius: .8rem;
+            padding: .85rem 1rem;
+            margin-bottom: .75rem;
+            border-left: 4px solid var(--mg-purple);
+            transition: background 0.2s;
+        }
+
+        .item-desafio:hover {
+            background: #eeeaff;
+        }
+
+        /* Variación para grupales terminados */
+        .item-desafio.terminado {
+            border-left-color: #6c757d;
+            background: #f1f1f1;
+            opacity: 0.8;
+        }
+
+        .item-desafio.terminado:hover {
+            background: #e9e9e9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg px-3 py-2">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="inicio.html">
+            <span style="font-size:1.8rem;line-height:1;">🧮</span>
+            <span>MathGo</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+            <i class="bi bi-list text-white fs-4"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navMain">
+            <ul class="navbar-nav ms-auto gap-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="inicio.html"><i class="bi bi-house-fill"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="amigos.html"><i class="bi bi-people-fill"></i> Amigos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="apuntes.html"><i class="bi bi-journal-text"></i> Apuntes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="bi bi-trophy-fill"></i> Desafíos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-desafios px-3 px-md-5">
+        <div>
+            <h2 class="mb-1">Zona de Desafíos</h2>
+            <p class="mb-0 opacity-75" style="font-size:.9rem;">Compite de manera individual o únete a salas grupales
+                programadas.</p>
+        </div>
+    </div>
+
+    <div class="container-fluid px-3 px-md-5 mt-4">
+
+        <p class="section-title">Elegí un Tema para Competir</p>
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 tema-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-facil rounded-pill px-2.5 py-1" style="font-size: 0.75rem;">Fácil /
+                            Intermedio</span>
+                        <span class="badge badge-modos rounded-pill px-2.5 py-1" style="font-size: .75rem;"><i
+                                class="bi bi-collection-fill"></i> Modos Disponibles</span>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-2">Funciones Matemáticas</h5>
+                    <p class="text-muted" style="font-size: .85rem; min-height: 40px;">Domina el comportamiento de
+                        funciones lineales, cuadráticas, dominio e imagen en el plano cartesiano.</p>
+                    <button class="btn btn-mg w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalFunciones">
+                        Ver desafíos <i class="bi bi-arrow-right-short"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 tema-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge badge-intermedio rounded-pill px-2.5 py-1"
+                            style="font-size: 0.75rem;">Intermedio</span>
+                        <span class="badge badge-modos rounded-pill px-2.5 py-1" style="font-size: .75rem;"><i
+                                class="bi bi-collection-fill"></i> Modos Disponibles</span>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-2">Matrices y Sistemas</h5>
+                    <p class="text-muted" style="font-size: .85rem; min-height: 40px;">Resolución de arreglos
+                        bidimensionales, determinantes, cálculo de inversas y sistemas lineales.</p>
+                    <button class="btn btn-mg w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalMatrices">
+                        Ver desafíos <i class="bi bi-arrow-right-short"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalFunciones" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-diagram-3-fill me-2"></i> Funciones Matemáticas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+
+                    <ul class="nav nav-tabs mb-3" id="tabFunciones" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="indiv-tab" data-bs-toggle="tab"
+                                data-bs-target="#funciones-indiv" type="button" role="tab"><i class="bi bi-person"></i>
+                                <span class="text-black"> Individuales</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="grupal-tab" data-bs-toggle="tab"
+                                data-bs-target="#funciones-grupal" type="button" role="tab"><i class="bi bi-people"></i>
+                                <span class="text-black">Grupales Programados</span></button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="tabFuncionesContent">
+
+                        <div class="tab-pane fade show active" id="funciones-indiv" role="tabpanel">
+                            <div class="item-desafio d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-0" style="font-size: .92rem;">1. Pendientes y Rectas</h6>
+                                    <span class="text-muted" style="font-size: .78rem;">Práctica libre • +20 pts</span>
+                                </div>
+                                <a class="btn btn-sm btn-mg px-3" href="desafio.html">Empezar</a>
+                            </div>
+                            <div class="item-desafio d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-0" style="font-size: .92rem;">2. El Vértice de la Parábola
+                                    </h6>
+                                    <span class="text-muted" style="font-size: .78rem;">Práctica libre • +35 pts</span>
+                                </div>
+                                <button class="btn btn-sm btn-mg px-3"
+                                    onclick="iniciarDesafio('Individual: Parábolas')">Empezar</button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="funciones-grupal" role="tabpanel">
+
+                            <div class="item-desafio d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-primary"><i class="bi bi-calendar-event"></i> Maratón
+                                        de Gráficos Críticos</h6>
+                                    <div class="text-muted mb-1" style="font-size: .8rem;">
+                                        <i class="bi bi-clock"></i> <strong>Inicio:</strong> Hoy - 18:00 hs
+                                    </div>
+                                    <span class="badge bg-success" style="font-size: .7rem;">Inscripción Abierta</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary px-3 fw-bold"
+                                    style="border-radius: .6rem;"
+                                    onclick="iniciarDesafio('Sala Grupal: Maratón')">Unirse a Sala</button>
+                            </div>
+
+                            <div class="item-desafio terminado d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-secondary">Desafío Relámpago: Inyectivas</h6>
+                                    <div class="text-muted mb-1" style="font-size: .8rem;">
+                                        <i class="bi bi-calendar-check"></i> 28 de Junio | <strong>Cierre:</strong>
+                                        15:30 hs (Finalizado)
+                                    </div>
+                                    <span class="badge bg-secondary" style="font-size: .7rem;">Terminado</span>
+                                </div>
+                                <button class="btn btn-sm btn-light border px-3 text-muted disabled"
+                                    style="border-radius: .6rem;">Cerrado</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalMatrices" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-grid-3x3-gap-fill me-2"></i> Matrices y Sistemas
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+
+                    <ul class="nav nav-tabs mb-3" id="tabMatrices" role="tablist">
+                        <li class="nav-item " role="presentation">
+                            <button class="nav-link active " id="indiv-m-tab" data-bs-toggle="tab"
+                                data-bs-target="#matrices-indiv" type="button" role="tab"><i class="bi bi-person"></i>
+                                Individuales</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="grupal-m-tab" data-bs-toggle="tab"
+                                data-bs-target="#matrices-grupal" type="button" role="tab"><i class="bi bi-people"></i>
+                                Grupales Programados</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="tabMatricesContent">
+
+                        <div class="tab-pane fade show active" id="matrices-indiv" role="tabpanel">
+                            <div class="item-desafio d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-0" style="font-size: .92rem;">1. Multiplicación A x B</h6>
+                                    <span class="text-muted" style="font-size: .78rem;">Práctica libre • +30 pts</span>
+                                </div>
+                                <button class="btn btn-sm btn-mg px-3"
+                                    onclick="iniciarDesafio('Individual: Multiplicación')">Empezar</button>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="matrices-grupal" role="tabpanel">
+
+                            <div class="item-desafio d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-primary"><i class="bi bi-calendar-event"></i> Batalla
+                                        de Determinantes Co-factores</h6>
+                                    <div class="text-muted mb-1" style="font-size: .8rem;">
+                                        <i class="bi bi-clock"></i> <strong>Inicio:</strong> Mañana - 14:00 hs
+                                    </div>
+                                    <span class="badge bg-success" style="font-size: .7rem;">Inscripción Abierta</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary px-3 fw-bold"
+                                    style="border-radius: .6rem;"
+                                    onclick="iniciarDesafio('Sala Grupal: Co-factores')">Unirse a Sala</button>
+                            </div>
+
+                            <div class="item-desafio terminado d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-secondary">Torneo Inter-Institutos: Gauss 3x3</h6>
+                                    <div class="text-muted mb-1" style="font-size: .8rem;">
+                                        <i class="bi bi-calendar-check"></i> 25 de Junio | <strong>Cierre:</strong>
+                                        20:00 hs (Finalizado)
+                                    </div>
+                                    <span class="badge bg-secondary" style="font-size: .7rem;">Terminado</span>
+                                </div>
+                                <button class="btn btn-sm btn-light border px-3 text-muted disabled"
+                                    style="border-radius: .6rem;">Cerrado</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function iniciarDesafio(nombreDesafio) {
+            alert(`🎯 Acción registrada para: "${nombreDesafio}".`);
+        }
+    </script>
+</body>
+
+</html>

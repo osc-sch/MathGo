@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MathGo - Amigos</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
   <style>
     :root {
       --mg-purple: #6f42c1;
@@ -14,17 +16,39 @@
       --mg-yellow: #ffc107;
       --mg-bg: #f0ebff;
     }
-    body { background: var(--mg-bg); font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
+
+    body {
+      background: var(--mg-bg);
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
 
     /* NAVBAR */
     .navbar {
       background: linear-gradient(135deg, var(--mg-purple-dark), var(--mg-purple));
-      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
     }
-    .navbar-brand span { color:#fff; font-weight:700; font-size:1.2rem; }
-    .nav-link { color:rgba(255,255,255,.85) !important; font-weight:500; }
-    .nav-link:hover, .nav-link.active { color:#fff !important; }
-    .nav-link .bi { font-size:1.1rem; margin-right:4px; }
+
+    .navbar-brand span {
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, .85) !important;
+      font-weight: 500;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #fff !important;
+    }
+
+    .nav-link .bi {
+      font-size: 1.1rem;
+      margin-right: 4px;
+    }
 
     /* HEADER */
     .page-header {
@@ -39,26 +63,41 @@
       position: relative;
       margin-top: -1.2rem;
     }
+
     .search-box input {
       border-radius: 2rem;
       padding: .75rem 1.2rem .75rem 3rem;
       border: none;
-      box-shadow: 0 4px 16px rgba(111,66,193,.2);
+      box-shadow: 0 4px 16px rgba(111, 66, 193, .2);
       font-size: .95rem;
     }
-    .search-box input:focus { outline: none; box-shadow: 0 4px 16px rgba(111,66,193,.35); }
+
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 4px 16px rgba(111, 66, 193, .35);
+    }
+
     .search-box .bi-search {
-      position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
       color: #aaa;
     }
 
     /* TABS */
-    .nav-tabs { border-bottom: 2px solid #e0d7f7; }
+    .nav-tabs {
+      border-bottom: 2px solid #e0d7f7;
+    }
+
     .nav-tabs .nav-link {
       color: var(--mg-purple) !important;
-      border: none; padding: .6rem 1.2rem;
-      font-weight: 600; font-size: .88rem;
+      border: none;
+      padding: .6rem 1.2rem;
+      font-weight: 600;
+      font-size: .88rem;
     }
+
     .nav-tabs .nav-link.active {
       color: var(--mg-purple-dark) !important;
       border-bottom: 3px solid var(--mg-purple) !important;
@@ -70,274 +109,410 @@
       background: #fff;
       border-radius: 1rem;
       padding: 1rem 1.2rem;
-      box-shadow: 0 2px 10px rgba(111,66,193,.1);
-      display: flex; align-items: center; gap: .9rem;
+      box-shadow: 0 2px 10px rgba(111, 66, 193, .1);
+      display: flex;
+      align-items: center;
+      gap: .9rem;
       transition: transform .15s, box-shadow .15s;
       position: relative;
     }
-    .friend-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(111,66,193,.18); }
+
+    .friend-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(111, 66, 193, .18);
+    }
 
     .avatar {
-      width: 48px; height: 48px; border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
       background: linear-gradient(135deg, var(--mg-purple), #9c6fe4);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-weight: 700; font-size: 1rem; flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
       position: relative;
     }
+
     .online-indicator {
-      width: 11px; height: 11px; border-radius: 50%; background: #28a745;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #28a745;
       border: 2px solid #fff;
-      position: absolute; bottom: 1px; right: 1px;
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
     }
 
-    .friend-info { flex: 1; min-width: 0; }
-    .friend-name { font-weight: 600; font-size: .95rem; margin-bottom: 2px; }
-    .friend-sub  { font-size: .78rem; color: #888; }
-    .friend-pts  { font-size: .78rem; color: var(--mg-purple); font-weight: 600; }
+    .friend-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .friend-name {
+      font-weight: 600;
+      font-size: .95rem;
+      margin-bottom: 2px;
+    }
+
+    .friend-sub {
+      font-size: .78rem;
+      color: #888;
+    }
+
+    .friend-pts {
+      font-size: .78rem;
+      color: var(--mg-purple);
+      font-weight: 600;
+    }
 
     .btn-friend {
-      border-radius: 2rem; font-size: .78rem; font-weight: 600;
-      padding: .3rem .9rem; border: none; flex-shrink: 0;
+      border-radius: 2rem;
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .3rem .9rem;
+      border: none;
+      flex-shrink: 0;
     }
-    .btn-ver     { background: var(--mg-purple); color: #fff; }
-    .btn-ver:hover { background: var(--mg-purple-dark); color: #fff; }
-    .btn-aceptar { background: #28a745; color: #fff; }
-    .btn-aceptar:hover { background: #1e7e34; color: #fff; }
-    .btn-rechazar { background: #f8f9fa; color: #666; border: 1px solid #ddd; }
-    .btn-rechazar:hover { background: #e2e6ea; }
-    .btn-enviar  { background: var(--mg-purple); color: #fff; }
-    .btn-enviar:hover { background: var(--mg-purple-dark); color: #fff; }
-    .btn-cancelar { background: #dc3545; color: #fff; }
-    .btn-cancelar:hover { background: #b02a37; color: #fff; }
+
+    .btn-ver {
+      background: var(--mg-purple);
+      color: #fff;
+    }
+
+    .btn-ver:hover {
+      background: var(--mg-purple-dark);
+      color: #fff;
+    }
+
+    .btn-aceptar {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .btn-aceptar:hover {
+      background: #1e7e34;
+      color: #fff;
+    }
+
+    .btn-rechazar {
+      background: #f8f9fa;
+      color: #666;
+      border: 1px solid #ddd;
+    }
+
+    .btn-rechazar:hover {
+      background: #e2e6ea;
+    }
+
+    .btn-enviar {
+      background: var(--mg-purple);
+      color: #fff;
+    }
+
+    .btn-enviar:hover {
+      background: var(--mg-purple-dark);
+      color: #fff;
+    }
+
+    .btn-cancelar {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .btn-cancelar:hover {
+      background: #b02a37;
+      color: #fff;
+    }
 
     /* SECCIÓN */
     .section-title {
-      font-weight: 700; font-size: 1rem; color: var(--mg-purple-dark);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--mg-purple-dark);
       border-left: 4px solid var(--mg-purple);
-      padding-left: .6rem; margin-bottom: 1rem;
+      padding-left: .6rem;
+      margin-bottom: 1rem;
     }
 
     /* MG-CARD */
     .mg-card {
-      background: #fff; border-radius: 1rem;
-      box-shadow: 0 2px 10px rgba(111,66,193,.1);
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 2px 10px rgba(111, 66, 193, .1);
       padding: 1.2rem 1.4rem;
     }
 
     /* RESULTADOS DE BÚSQUEDA */
-    #resultado-busqueda { display: none; }
+    #resultado-busqueda {
+      display: none;
+    }
 
     /* ESTADO VACÍO */
     .empty-state {
-      text-align: center; padding: 2rem 1rem;
-      color: #aaa; font-size: .9rem;
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #aaa;
+      font-size: .9rem;
     }
-    .empty-state .bi { font-size: 2.5rem; color: #d0c4f7; display: block; margin-bottom: .5rem; }
+
+    .empty-state .bi {
+      font-size: 2.5rem;
+      color: #d0c4f7;
+      display: block;
+      margin-bottom: .5rem;
+    }
 
     /* MODAL PERFIL */
     .modal-avatar {
-      width: 80px; height: 80px; border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       background: linear-gradient(135deg, var(--mg-purple), #9c6fe4);
-      display: flex; align-items: center; justify-content: center;
-      color: #fff; font-weight: 700; font-size: 2rem; margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
     }
+
     .stat-pill {
-      background: #f0ebff; border-radius: .8rem; padding: .5rem .9rem;
+      background: #f0ebff;
+      border-radius: .8rem;
+      padding: .5rem .9rem;
       text-align: center;
     }
-    .stat-pill .num { font-size: 1.3rem; font-weight: 700; color: var(--mg-purple); }
-    .stat-pill .lbl { font-size: .72rem; color: #666; }
 
-    #toast-container { position: fixed; bottom: 1.2rem; right: 1.2rem; z-index: 9999; }
+    .stat-pill .num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--mg-purple);
+    }
+
+    .stat-pill .lbl {
+      font-size: .72rem;
+      color: #666;
+    }
+
+    #toast-container {
+      position: fixed;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      z-index: 9999;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg px-3 py-2">
-  <a class="navbar-brand d-flex align-items-center gap-2" href="inicio.html">
-    <span style="font-size:1.8rem;line-height:1;">🧮</span>
-    <span>MathGo</span>
-  </a>
-  <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
-    <i class="bi bi-list text-white fs-4"></i>
-  </button>
-  <div class="collapse navbar-collapse" id="navMain">
-    <ul class="navbar-nav ms-auto gap-1">
-      <li class="nav-item"><a class="nav-link" href="inicio.html"><i class="bi bi-house-fill"></i> Inicio</a></li>
-      <li class="nav-item"><a class="nav-link active" href="amigos.html"><i class="bi bi-people-fill"></i> Amigos</a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-journal-text"></i> Apuntes</a></li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-trophy-fill"></i> Desafíos</a></li>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg px-3 py-2">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="inicio.html">
+      <span style="font-size:1.8rem;line-height:1;">🧮</span>
+      <span>MathGo</span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="inicio.html"><i class="bi bi-house-fill"></i> Inicio</a></li>
+        <li class="nav-item"><a class="nav-link active" href="amigos.html"><i class="bi bi-people-fill"></i> Amigos</a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="apuntes.html"><i class="bi bi-journal-text"></i> Apuntes</a></li>
+        <li class="nav-item"><a class="nav-link" href="desafios.html"><i class="bi bi-trophy-fill"></i> Desafíos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header px-3 px-md-5">
+    <h4 class="fw-bold mb-0">👥 Amigos</h4>
+    <p class="mb-0" style="font-size:.88rem;opacity:.85;">Conectate y aprendé con otros estudiantes</p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="container-fluid px-3 px-md-5 mt-3 pb-5">
+
+    <!-- BUSCADOR -->
+    <div class="search-box mb-4">
+      <i class="bi bi-search"></i>
+      <input type="text" id="buscador" class="form-control" placeholder="Buscar estudiantes por nombre..."
+        oninput="buscarEstudiantes(this.value)" />
+    </div>
+
+    <!-- RESULTADOS BÚSQUEDA -->
+    <div id="resultado-busqueda" class="mb-4">
+      <p class="section-title">🔍 Resultados</p>
+      <div id="lista-resultados" class="d-flex flex-column gap-3"></div>
+    </div>
+
+    <!-- TABS -->
+    <ul class="nav nav-tabs mb-4" id="friendTabs">
+      <li class="nav-item">
+        <button class="nav-link active" onclick="mostrarTab('mis-amigos', this)">
+          Mis amigos <span class="badge bg-secondary ms-1" id="badge-amigos">0</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" onclick="mostrarTab('solicitudes', this)">
+          Solicitudes <span class="badge bg-danger ms-1" id="badge-solicitudes">0</span>
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" onclick="mostrarTab('enviadas', this)">
+          Enviadas <span class="badge bg-secondary ms-1" id="badge-enviadas">0</span>
+        </button>
+      </li>
     </ul>
-  </div>
-</nav>
 
-<!-- HEADER -->
-<div class="page-header px-3 px-md-5">
-  <h4 class="fw-bold mb-0">👥 Amigos</h4>
-  <p class="mb-0" style="font-size:.88rem;opacity:.85;">Conectate y aprendé con otros estudiantes</p>
-</div>
+    <!-- MIS AMIGOS -->
+    <div id="tab-mis-amigos">
+      <div class="row row-cols-1 row-cols-md-2 g-3" id="lista-amigos"></div>
+    </div>
 
-<!-- MAIN -->
-<div class="container-fluid px-3 px-md-5 mt-3 pb-5">
+    <!-- SOLICITUDES RECIBIDAS -->
+    <div id="tab-solicitudes" style="display:none;">
+      <div class="d-flex flex-column gap-3" id="lista-solicitudes"></div>
+    </div>
 
-  <!-- BUSCADOR -->
-  <div class="search-box mb-4">
-    <i class="bi bi-search"></i>
-    <input type="text" id="buscador" class="form-control" placeholder="Buscar estudiantes por nombre..."
-           oninput="buscarEstudiantes(this.value)"/>
-  </div>
+    <!-- SOLICITUDES ENVIADAS -->
+    <div id="tab-enviadas" style="display:none;">
+      <div class="d-flex flex-column gap-3" id="lista-enviadas"></div>
+    </div>
 
-  <!-- RESULTADOS BÚSQUEDA -->
-  <div id="resultado-busqueda" class="mb-4">
-    <p class="section-title">🔍 Resultados</p>
-    <div id="lista-resultados" class="d-flex flex-column gap-3"></div>
   </div>
 
-  <!-- TABS -->
-  <ul class="nav nav-tabs mb-4" id="friendTabs">
-    <li class="nav-item">
-      <button class="nav-link active" onclick="mostrarTab('mis-amigos', this)">
-        Mis amigos <span class="badge bg-secondary ms-1" id="badge-amigos">0</span>
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" onclick="mostrarTab('solicitudes', this)">
-        Solicitudes <span class="badge bg-danger ms-1" id="badge-solicitudes">0</span>
-      </button>
-    </li>
-    <li class="nav-item">
-      <button class="nav-link" onclick="mostrarTab('enviadas', this)">
-        Enviadas <span class="badge bg-secondary ms-1" id="badge-enviadas">0</span>
-      </button>
-    </li>
-  </ul>
-
-  <!-- MIS AMIGOS -->
-  <div id="tab-mis-amigos">
-    <div class="row row-cols-1 row-cols-md-2 g-3" id="lista-amigos"></div>
-  </div>
-
-  <!-- SOLICITUDES RECIBIDAS -->
-  <div id="tab-solicitudes" style="display:none;">
-    <div class="d-flex flex-column gap-3" id="lista-solicitudes"></div>
-  </div>
-
-  <!-- SOLICITUDES ENVIADAS -->
-  <div id="tab-enviadas" style="display:none;">
-    <div class="d-flex flex-column gap-3" id="lista-enviadas"></div>
-  </div>
-
-</div>
-
-<!-- MODAL PERFIL AMIGO -->
-<div class="modal fade" id="modalPerfil" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius:1.2rem;border:none;">
-      <div class="modal-header border-0 pb-0">
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body text-center pt-0">
-        <div class="modal-avatar" id="modal-avatar">JD</div>
-        <h5 class="fw-bold mb-1" id="modal-nombre">-</h5>
-        <p class="text-muted mb-3" style="font-size:.85rem;" id="modal-sub">-</p>
-        <div class="row g-2 mb-3">
-          <div class="col-4"><div class="stat-pill"><div class="num" id="modal-ejercicios">-</div><div class="lbl">Ejercicios</div></div></div>
-          <div class="col-4"><div class="stat-pill"><div class="num" id="modal-logros">-</div><div class="lbl">Logros</div></div></div>
-          <div class="col-4"><div class="stat-pill"><div class="num" id="modal-racha">-</div><div class="lbl">Racha</div></div></div>
+  <!-- MODAL PERFIL AMIGO -->
+  <div class="modal fade" id="modalPerfil" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius:1.2rem;border:none;">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="d-flex justify-content-center gap-2">
-          <button class="btn btn-friend btn-ver" data-bs-dismiss="modal">Cerrar</button>
-          <button class="btn btn-friend btn-cancelar" id="btn-modal-eliminar" onclick="confirmarEliminar()">
-            Eliminar amigo
-          </button>
+        <div class="modal-body text-center pt-0">
+          <div class="modal-avatar" id="modal-avatar">JD</div>
+          <h5 class="fw-bold mb-1" id="modal-nombre">-</h5>
+          <p class="text-muted mb-3" style="font-size:.85rem;" id="modal-sub">-</p>
+          <div class="row g-2 mb-3">
+            <div class="col-4">
+              <div class="stat-pill">
+                <div class="num" id="modal-ejercicios">-</div>
+                <div class="lbl">Ejercicios</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-pill">
+                <div class="num" id="modal-logros">-</div>
+                <div class="lbl">Logros</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="stat-pill">
+                <div class="num" id="modal-racha">-</div>
+                <div class="lbl">Racha</div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-friend btn-ver" data-bs-dismiss="modal">Cerrar</button>
+            <button class="btn btn-friend btn-cancelar" id="btn-modal-eliminar" onclick="confirmarEliminar()">
+              Eliminar amigo
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="toast-container"></div>
+  <div id="toast-container"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-// ═══════════════════════════════════════════
-//  DATOS (arreglos que simulan la base de datos)
-// ═══════════════════════════════════════════
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ═══════════════════════════════════════════
+    //  DATOS (arreglos que simulan la base de datos)
+    // ═══════════════════════════════════════════
 
-// Todos los estudiantes del sistema
-const todosLosEstudiantes = [
-  { id: 1,  nombre: 'Lucas Méndez',    iniciales: 'LM', materia: 'Álgebra',     puntos: 340, ejercicios: 42, logros: 9,  racha: 7,  online: true  },
-  { id: 2,  nombre: 'Sofía Rodríguez', iniciales: 'SR', materia: 'Geometría',   puntos: 280, ejercicios: 35, logros: 6,  racha: 3,  online: true  },
-  { id: 3,  nombre: 'Matías García',   iniciales: 'MG', materia: 'Estadística', puntos: 210, ejercicios: 28, logros: 5,  racha: 0,  online: false },
-  { id: 4,  nombre: 'Ana Pérez',       iniciales: 'AP', materia: 'Cálculo',     puntos: 190, ejercicios: 22, logros: 4,  racha: 2,  online: true  },
-  { id: 5,  nombre: 'Diego López',     iniciales: 'DL', materia: 'Álgebra',     puntos: 155, ejercicios: 18, logros: 3,  racha: 1,  online: false },
-  { id: 6,  nombre: 'Valentina Cruz',  iniciales: 'VC', materia: 'Geometría',   puntos: 420, ejercicios: 55, logros: 12, racha: 14, online: true  },
-  { id: 7,  nombre: 'Franco Ríos',     iniciales: 'FR', materia: 'Estadística', puntos: 95,  ejercicios: 12, logros: 2,  racha: 0,  online: false },
-  { id: 8,  nombre: 'Camila Torres',   iniciales: 'CT', materia: 'Cálculo',     puntos: 310, ejercicios: 40, logros: 8,  racha: 5,  online: true  },
-  { id: 9,  nombre: 'Ignacio Vera',    iniciales: 'IV', materia: 'Álgebra',     puntos: 245, ejercicios: 30, logros: 6,  racha: 4,  online: false },
-  { id: 10, nombre: 'Luciana Ortiz',   iniciales: 'LO', materia: 'Geometría',   puntos: 175, ejercicios: 20, logros: 3,  racha: 2,  online: true  }
-];
+    // Todos los estudiantes del sistema
+    const todosLosEstudiantes = [
+      { id: 1, nombre: 'Lucas Méndez', iniciales: 'LM', materia: 'Álgebra', puntos: 340, ejercicios: 42, logros: 9, racha: 7, online: true },
+      { id: 2, nombre: 'Sofía Rodríguez', iniciales: 'SR', materia: 'Geometría', puntos: 280, ejercicios: 35, logros: 6, racha: 3, online: true },
+      { id: 3, nombre: 'Matías García', iniciales: 'MG', materia: 'Estadística', puntos: 210, ejercicios: 28, logros: 5, racha: 0, online: false },
+      { id: 4, nombre: 'Ana Pérez', iniciales: 'AP', materia: 'Cálculo', puntos: 190, ejercicios: 22, logros: 4, racha: 2, online: true },
+      { id: 5, nombre: 'Diego López', iniciales: 'DL', materia: 'Álgebra', puntos: 155, ejercicios: 18, logros: 3, racha: 1, online: false },
+      { id: 6, nombre: 'Valentina Cruz', iniciales: 'VC', materia: 'Geometría', puntos: 420, ejercicios: 55, logros: 12, racha: 14, online: true },
+      { id: 7, nombre: 'Franco Ríos', iniciales: 'FR', materia: 'Estadística', puntos: 95, ejercicios: 12, logros: 2, racha: 0, online: false },
+      { id: 8, nombre: 'Camila Torres', iniciales: 'CT', materia: 'Cálculo', puntos: 310, ejercicios: 40, logros: 8, racha: 5, online: true },
+      { id: 9, nombre: 'Ignacio Vera', iniciales: 'IV', materia: 'Álgebra', puntos: 245, ejercicios: 30, logros: 6, racha: 4, online: false },
+      { id: 10, nombre: 'Luciana Ortiz', iniciales: 'LO', materia: 'Geometría', puntos: 175, ejercicios: 20, logros: 3, racha: 2, online: true }
+    ];
 
-// Estado de relaciones (arreglos de IDs)
-let misAmigos    = cargarLista('mg_amigos',    [1, 2, 3, 4]);
-let solicitudes  = cargarLista('mg_solicitudes', [5, 6]);  // recibidas
-let enviadas     = cargarLista('mg_enviadas',  [7]);
+    // Estado de relaciones (arreglos de IDs)
+    let misAmigos = cargarLista('mg_amigos', [1, 2, 3, 4]);
+    let solicitudes = cargarLista('mg_solicitudes', [5, 6]);  // recibidas
+    let enviadas = cargarLista('mg_enviadas', [7]);
 
-let modalAmigo   = null; // para la acción de eliminar
+    let modalAmigo = null; // para la acción de eliminar
 
-// ═══════════════════════════════════════════
-//  PERSISTENCIA
-// ═══════════════════════════════════════════
-function cargarLista(key, defecto) {
-  const raw = localStorage.getItem(key);
-  return raw ? JSON.parse(raw) : defecto;
-}
-function guardarListas() {
-  localStorage.setItem('mg_amigos',      JSON.stringify(misAmigos));
-  localStorage.setItem('mg_solicitudes', JSON.stringify(solicitudes));
-  localStorage.setItem('mg_enviadas',    JSON.stringify(enviadas));
-}
+    // ═══════════════════════════════════════════
+    //  PERSISTENCIA
+    // ═══════════════════════════════════════════
+    function cargarLista(key, defecto) {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : defecto;
+    }
+    function guardarListas() {
+      localStorage.setItem('mg_amigos', JSON.stringify(misAmigos));
+      localStorage.setItem('mg_solicitudes', JSON.stringify(solicitudes));
+      localStorage.setItem('mg_enviadas', JSON.stringify(enviadas));
+    }
 
-// ═══════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  renderAmigos();
-  renderSolicitudes();
-  renderEnviadas();
-  actualizarBadges();
-});
+    // ═══════════════════════════════════════════
+    //  INIT
+    // ═══════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAmigos();
+      renderSolicitudes();
+      renderEnviadas();
+      actualizarBadges();
+    });
 
-// ═══════════════════════════════════════════
-//  TABS
-// ═══════════════════════════════════════════
-function mostrarTab(nombre, btn) {
-  ['mis-amigos', 'solicitudes', 'enviadas'].forEach(t => {
-    document.getElementById(`tab-${t}`).style.display = t === nombre ? 'block' : 'none';
-  });
-  document.querySelectorAll('#friendTabs .nav-link').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
+    // ═══════════════════════════════════════════
+    //  TABS
+    // ═══════════════════════════════════════════
+    function mostrarTab(nombre, btn) {
+      ['mis-amigos', 'solicitudes', 'enviadas'].forEach(t => {
+        document.getElementById(`tab-${t}`).style.display = t === nombre ? 'block' : 'none';
+      });
+      document.querySelectorAll('#friendTabs .nav-link').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
 
-// ═══════════════════════════════════════════
-//  RENDER MIS AMIGOS
-// ═══════════════════════════════════════════
-function renderAmigos() {
-  const lista = document.getElementById('lista-amigos');
-  lista.innerHTML = '';
+    // ═══════════════════════════════════════════
+    //  RENDER MIS AMIGOS
+    // ═══════════════════════════════════════════
+    function renderAmigos() {
+      const lista = document.getElementById('lista-amigos');
+      lista.innerHTML = '';
 
-  const amigos = todosLosEstudiantes.filter(e => misAmigos.includes(e.id));
+      const amigos = todosLosEstudiantes.filter(e => misAmigos.includes(e.id));
 
-  if (!amigos.length) {
-    lista.innerHTML = `<div class="col-12"><div class="empty-state"><i class="bi bi-people"></i>Aún no tenés amigos. ¡Buscá estudiantes!</div></div>`;
-    return;
-  }
+      if (!amigos.length) {
+        lista.innerHTML = `<div class="col-12"><div class="empty-state"><i class="bi bi-people"></i>Aún no tenés amigos. ¡Buscá estudiantes!</div></div>`;
+        return;
+      }
 
-  amigos.forEach(a => {
-    const col = document.createElement('div');
-    col.className = 'col';
-    col.innerHTML = `
+      amigos.forEach(a => {
+        const col = document.createElement('div');
+        col.className = 'col';
+        col.innerHTML = `
       <div class="friend-card">
         <div class="avatar">
           ${a.iniciales}
@@ -350,29 +525,29 @@ function renderAmigos() {
         </div>
         <button class="btn btn-friend btn-ver" onclick='verPerfil(${JSON.stringify(a)})'>Ver perfil</button>
       </div>`;
-    lista.appendChild(col);
-  });
-}
+        lista.appendChild(col);
+      });
+    }
 
-// ═══════════════════════════════════════════
-//  RENDER SOLICITUDES RECIBIDAS
-// ═══════════════════════════════════════════
-function renderSolicitudes() {
-  const lista = document.getElementById('lista-solicitudes');
-  lista.innerHTML = '';
+    // ═══════════════════════════════════════════
+    //  RENDER SOLICITUDES RECIBIDAS
+    // ═══════════════════════════════════════════
+    function renderSolicitudes() {
+      const lista = document.getElementById('lista-solicitudes');
+      lista.innerHTML = '';
 
-  const pendientes = todosLosEstudiantes.filter(e => solicitudes.includes(e.id));
+      const pendientes = todosLosEstudiantes.filter(e => solicitudes.includes(e.id));
 
-  if (!pendientes.length) {
-    lista.innerHTML = `<div class="empty-state"><i class="bi bi-inbox"></i>Sin solicitudes pendientes.</div>`;
-    return;
-  }
+      if (!pendientes.length) {
+        lista.innerHTML = `<div class="empty-state"><i class="bi bi-inbox"></i>Sin solicitudes pendientes.</div>`;
+        return;
+      }
 
-  pendientes.forEach(a => {
-    const div = document.createElement('div');
-    div.className = 'friend-card';
-    div.id = `sol-${a.id}`;
-    div.innerHTML = `
+      pendientes.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'friend-card';
+        div.id = `sol-${a.id}`;
+        div.innerHTML = `
       <div class="avatar">${a.iniciales}</div>
       <div class="friend-info">
         <div class="friend-name">${a.nombre}</div>
@@ -382,29 +557,29 @@ function renderSolicitudes() {
         <button class="btn btn-friend btn-aceptar"  onclick="aceptarSolicitud(${a.id})"><i class="bi bi-check-lg"></i></button>
         <button class="btn btn-friend btn-rechazar" onclick="rechazarSolicitud(${a.id})"><i class="bi bi-x-lg"></i></button>
       </div>`;
-    lista.appendChild(div);
-  });
-}
+        lista.appendChild(div);
+      });
+    }
 
-// ═══════════════════════════════════════════
-//  RENDER ENVIADAS
-// ═══════════════════════════════════════════
-function renderEnviadas() {
-  const lista = document.getElementById('lista-enviadas');
-  lista.innerHTML = '';
+    // ═══════════════════════════════════════════
+    //  RENDER ENVIADAS
+    // ═══════════════════════════════════════════
+    function renderEnviadas() {
+      const lista = document.getElementById('lista-enviadas');
+      lista.innerHTML = '';
 
-  const pendientes = todosLosEstudiantes.filter(e => enviadas.includes(e.id));
+      const pendientes = todosLosEstudiantes.filter(e => enviadas.includes(e.id));
 
-  if (!pendientes.length) {
-    lista.innerHTML = `<div class="empty-state"><i class="bi bi-send"></i>No tenés solicitudes enviadas.</div>`;
-    return;
-  }
+      if (!pendientes.length) {
+        lista.innerHTML = `<div class="empty-state"><i class="bi bi-send"></i>No tenés solicitudes enviadas.</div>`;
+        return;
+      }
 
-  pendientes.forEach(a => {
-    const div = document.createElement('div');
-    div.className = 'friend-card';
-    div.id = `env-${a.id}`;
-    div.innerHTML = `
+      pendientes.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'friend-card';
+        div.id = `env-${a.id}`;
+        div.innerHTML = `
       <div class="avatar">${a.iniciales}</div>
       <div class="friend-info">
         <div class="friend-name">${a.nombre}</div>
@@ -412,114 +587,114 @@ function renderEnviadas() {
         <div class="friend-sub" style="color:#f0a500;">⏳ Pendiente</div>
       </div>
       <button class="btn btn-friend btn-cancelar" onclick="cancelarEnviada(${a.id})">Cancelar</button>`;
-    lista.appendChild(div);
-  });
-}
-
-// ═══════════════════════════════════════════
-//  ACCIONES
-// ═══════════════════════════════════════════
-function aceptarSolicitud(id) {
-  solicitudes = solicitudes.filter(x => x !== id);
-  if (!misAmigos.includes(id)) misAmigos.push(id);
-  guardarListas();
-  renderAmigos();
-  renderSolicitudes();
-  actualizarBadges();
-  const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
-  mostrarToast(`¡${nombre} es ahora tu amigo/a! 🎉`, 'success');
-}
-
-function rechazarSolicitud(id) {
-  solicitudes = solicitudes.filter(x => x !== id);
-  guardarListas();
-  renderSolicitudes();
-  actualizarBadges();
-  mostrarToast('Solicitud rechazada.', 'info');
-}
-
-function cancelarEnviada(id) {
-  enviadas = enviadas.filter(x => x !== id);
-  guardarListas();
-  renderEnviadas();
-  actualizarBadges();
-  mostrarToast('Solicitud cancelada.', 'info');
-}
-
-function enviarSolicitud(id) {
-  if (misAmigos.includes(id))   { mostrarToast('Ya son amigos.', 'info'); return; }
-  if (enviadas.includes(id))    { mostrarToast('Ya enviaste una solicitud.', 'info'); return; }
-  if (solicitudes.includes(id)) { aceptarSolicitud(id); return; }
-
-  enviadas.push(id);
-  guardarListas();
-  renderEnviadas();
-  actualizarBadges();
-
-  const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
-  mostrarToast(`Solicitud enviada a ${nombre} 📨`, 'success');
-
-  // Actualizar botón en resultados
-  const btn = document.getElementById(`btn-enviar-${id}`);
-  if (btn) {
-    btn.textContent = 'Enviada ✓';
-    btn.disabled = true;
-    btn.style.background = '#aaa';
-  }
-}
-
-function eliminarAmigo(id) {
-  misAmigos = misAmigos.filter(x => x !== id);
-  guardarListas();
-  renderAmigos();
-  actualizarBadges();
-  const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
-  mostrarToast(`${nombre} fue eliminado/a de tus amigos.`, 'info');
-}
-
-// ═══════════════════════════════════════════
-//  BÚSQUEDA
-// ═══════════════════════════════════════════
-function buscarEstudiantes(query) {
-  const seccion  = document.getElementById('resultado-busqueda');
-  const lista    = document.getElementById('lista-resultados');
-  const q        = query.trim().toLowerCase();
-
-  if (!q) { seccion.style.display = 'none'; return; }
-
-  const resultados = todosLosEstudiantes.filter(e =>
-    e.nombre.toLowerCase().includes(q)
-  );
-
-  seccion.style.display = 'block';
-  lista.innerHTML = '';
-
-  if (!resultados.length) {
-    lista.innerHTML = `<div class="empty-state"><i class="bi bi-search"></i>Sin resultados para "${query}"</div>`;
-    return;
-  }
-
-  resultados.forEach(a => {
-    const esAmigo     = misAmigos.includes(a.id);
-    const esEnviada   = enviadas.includes(a.id);
-    const esSolicitud = solicitudes.includes(a.id);
-
-    let btnHTML = '';
-    if (esAmigo) {
-      btnHTML = `<span class="badge bg-success">Amigo/a</span>`;
-    } else if (esSolicitud) {
-      btnHTML = `<button class="btn btn-friend btn-aceptar" onclick="aceptarSolicitud(${a.id})">Aceptar</button>`;
-    } else {
-      const label   = esEnviada ? 'Enviada ✓' : '<i class="bi bi-person-plus"></i> Agregar';
-      const disabled = esEnviada ? 'disabled' : '';
-      const style    = esEnviada ? 'background:#aaa;' : '';
-      btnHTML = `<button id="btn-enviar-${a.id}" class="btn btn-friend btn-enviar"
-                   style="${style}" ${disabled} onclick="enviarSolicitud(${a.id})">${label}</button>`;
+        lista.appendChild(div);
+      });
     }
 
-    const div = document.createElement('div');
-    div.className = 'friend-card';
-    div.innerHTML = `
+    // ═══════════════════════════════════════════
+    //  ACCIONES
+    // ═══════════════════════════════════════════
+    function aceptarSolicitud(id) {
+      solicitudes = solicitudes.filter(x => x !== id);
+      if (!misAmigos.includes(id)) misAmigos.push(id);
+      guardarListas();
+      renderAmigos();
+      renderSolicitudes();
+      actualizarBadges();
+      const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
+      mostrarToast(`¡${nombre} es ahora tu amigo/a! 🎉`, 'success');
+    }
+
+    function rechazarSolicitud(id) {
+      solicitudes = solicitudes.filter(x => x !== id);
+      guardarListas();
+      renderSolicitudes();
+      actualizarBadges();
+      mostrarToast('Solicitud rechazada.', 'info');
+    }
+
+    function cancelarEnviada(id) {
+      enviadas = enviadas.filter(x => x !== id);
+      guardarListas();
+      renderEnviadas();
+      actualizarBadges();
+      mostrarToast('Solicitud cancelada.', 'info');
+    }
+
+    function enviarSolicitud(id) {
+      if (misAmigos.includes(id)) { mostrarToast('Ya son amigos.', 'info'); return; }
+      if (enviadas.includes(id)) { mostrarToast('Ya enviaste una solicitud.', 'info'); return; }
+      if (solicitudes.includes(id)) { aceptarSolicitud(id); return; }
+
+      enviadas.push(id);
+      guardarListas();
+      renderEnviadas();
+      actualizarBadges();
+
+      const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
+      mostrarToast(`Solicitud enviada a ${nombre} 📨`, 'success');
+
+      // Actualizar botón en resultados
+      const btn = document.getElementById(`btn-enviar-${id}`);
+      if (btn) {
+        btn.textContent = 'Enviada ✓';
+        btn.disabled = true;
+        btn.style.background = '#aaa';
+      }
+    }
+
+    function eliminarAmigo(id) {
+      misAmigos = misAmigos.filter(x => x !== id);
+      guardarListas();
+      renderAmigos();
+      actualizarBadges();
+      const nombre = todosLosEstudiantes.find(e => e.id === id)?.nombre;
+      mostrarToast(`${nombre} fue eliminado/a de tus amigos.`, 'info');
+    }
+
+    // ═══════════════════════════════════════════
+    //  BÚSQUEDA
+    // ═══════════════════════════════════════════
+    function buscarEstudiantes(query) {
+      const seccion = document.getElementById('resultado-busqueda');
+      const lista = document.getElementById('lista-resultados');
+      const q = query.trim().toLowerCase();
+
+      if (!q) { seccion.style.display = 'none'; return; }
+
+      const resultados = todosLosEstudiantes.filter(e =>
+        e.nombre.toLowerCase().includes(q)
+      );
+
+      seccion.style.display = 'block';
+      lista.innerHTML = '';
+
+      if (!resultados.length) {
+        lista.innerHTML = `<div class="empty-state"><i class="bi bi-search"></i>Sin resultados para "${query}"</div>`;
+        return;
+      }
+
+      resultados.forEach(a => {
+        const esAmigo = misAmigos.includes(a.id);
+        const esEnviada = enviadas.includes(a.id);
+        const esSolicitud = solicitudes.includes(a.id);
+
+        let btnHTML = '';
+        if (esAmigo) {
+          btnHTML = `<span class="badge bg-success">Amigo/a</span>`;
+        } else if (esSolicitud) {
+          btnHTML = `<button class="btn btn-friend btn-aceptar" onclick="aceptarSolicitud(${a.id})">Aceptar</button>`;
+        } else {
+          const label = esEnviada ? 'Enviada ✓' : '<i class="bi bi-person-plus"></i> Agregar';
+          const disabled = esEnviada ? 'disabled' : '';
+          const style = esEnviada ? 'background:#aaa;' : '';
+          btnHTML = `<button id="btn-enviar-${a.id}" class="btn btn-friend btn-enviar"
+                   style="${style}" ${disabled} onclick="enviarSolicitud(${a.id})">${label}</button>`;
+        }
+
+        const div = document.createElement('div');
+        div.className = 'friend-card';
+        div.innerHTML = `
       <div class="avatar">
         ${a.iniciales}
         ${a.online ? '<span class="online-indicator"></span>' : ''}
@@ -529,64 +704,75 @@ function buscarEstudiantes(query) {
         <div class="friend-sub">${a.materia} · ${a.puntos} pts</div>
       </div>
       ${btnHTML}`;
-    lista.appendChild(div);
-  });
-}
+        lista.appendChild(div);
+      });
+    }
 
-// ═══════════════════════════════════════════
-//  VER PERFIL (MODAL)
-// ═══════════════════════════════════════════
-function verPerfil(amigo) {
-  modalAmigo = amigo;
-  document.getElementById('modal-avatar').textContent    = amigo.iniciales;
-  document.getElementById('modal-nombre').textContent    = amigo.nombre;
-  document.getElementById('modal-sub').textContent       = amigo.materia + ' · ' + amigo.puntos + ' pts';
-  document.getElementById('modal-ejercicios').textContent = amigo.ejercicios;
-  document.getElementById('modal-logros').textContent    = amigo.logros;
-  document.getElementById('modal-racha').textContent     = amigo.racha + 'd';
-  new bootstrap.Modal(document.getElementById('modalPerfil')).show();
-}
+    // ═══════════════════════════════════════════
+    //  VER PERFIL (MODAL)
+    // ═══════════════════════════════════════════
+    function verPerfil(amigo) {
+      modalAmigo = amigo;
+      document.getElementById('modal-avatar').textContent = amigo.iniciales;
+      document.getElementById('modal-nombre').textContent = amigo.nombre;
+      document.getElementById('modal-sub').textContent = amigo.materia + ' · ' + amigo.puntos + ' pts';
+      document.getElementById('modal-ejercicios').textContent = amigo.ejercicios;
+      document.getElementById('modal-logros').textContent = amigo.logros;
+      document.getElementById('modal-racha').textContent = amigo.racha + 'd';
+      new bootstrap.Modal(document.getElementById('modalPerfil')).show();
+    }
 
-function confirmarEliminar() {
-  if (!modalAmigo) return;
-  bootstrap.Modal.getInstance(document.getElementById('modalPerfil')).hide();
-  eliminarAmigo(modalAmigo.id);
-  modalAmigo = null;
-}
+    function confirmarEliminar() {
+      if (!modalAmigo) return;
+      bootstrap.Modal.getInstance(document.getElementById('modalPerfil')).hide();
+      eliminarAmigo(modalAmigo.id);
+      modalAmigo = null;
+    }
 
-// ═══════════════════════════════════════════
-//  BADGES
-// ═══════════════════════════════════════════
-function actualizarBadges() {
-  document.getElementById('badge-amigos').textContent     = misAmigos.length;
-  document.getElementById('badge-solicitudes').textContent = solicitudes.length;
-  document.getElementById('badge-enviadas').textContent    = enviadas.length;
-}
+    // ═══════════════════════════════════════════
+    //  BADGES
+    // ═══════════════════════════════════════════
+    function actualizarBadges() {
+      document.getElementById('badge-amigos').textContent = misAmigos.length;
+      document.getElementById('badge-solicitudes').textContent = solicitudes.length;
+      document.getElementById('badge-enviadas').textContent = enviadas.length;
+    }
 
-// ═══════════════════════════════════════════
-//  UTIL
-// ═══════════════════════════════════════════
-function cerrarSesion() {
-  localStorage.removeItem('usuarioActual');
-  mostrarToast('Sesión cerrada.', 'info');
-  setTimeout(() => { window.location.href = 'login.html'; }, 1200);
-}
+    // ═══════════════════════════════════════════
+    //  UTIL
+    // ═══════════════════════════════════════════
+    function cerrarSesion() {
+      localStorage.removeItem('usuarioActual');
+      mostrarToast('Sesión cerrada.', 'info');
+      setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+    }
 
-function mostrarToast(mensaje, tipo = 'info') {
-  const colores = { success: '#28a745', info: '#6f42c1', warning: '#ffc107', error: '#dc3545' };
-  const toast   = document.createElement('div');
-  toast.style.cssText = `
+    function mostrarToast(mensaje, tipo = 'info') {
+      const colores = { success: '#28a745', info: '#6f42c1', warning: '#ffc107', error: '#dc3545' };
+      const toast = document.createElement('div');
+      toast.style.cssText = `
     background:${colores[tipo]};color:#fff;padding:.75rem 1.2rem;
     border-radius:.7rem;margin-top:.5rem;font-size:.88rem;
     box-shadow:0 4px 12px rgba(0,0,0,.2);animation:fadeIn .3s;`;
-  toast.innerHTML = `<i class="bi bi-info-circle me-2"></i>${mensaje}`;
-  document.getElementById('toast-container').appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
-</script>
+      toast.innerHTML = `<i class="bi bi-info-circle me-2"></i>${mensaje}`;
+      document.getElementById('toast-container').appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
 
-<style>
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
-</style>
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </body>
+
 </html>

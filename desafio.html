@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathGo - Quiz de Pendientes y Rectas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+    <style>
+        :root {
+            --mg-purple: #6f42c1;
+            --mg-purple-dark: #4b2a91;
+            --mg-bg: #f0ebff;
+            --mg-card: #ffffff;
+        }
+
+        body {
+            background-color: var(--mg-bg);
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: linear-gradient(135deg, var(--mg-purple-dark), var(--mg-purple));
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+        }
+
+        .navbar-brand span {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, .85) !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #fff !important;
+        }
+
+        /* ── CONTAINER DEL QUIZ ── */
+        .quiz-container {
+            max-width: 650px;
+            margin: 2rem auto;
+        }
+
+        .card-quiz {
+            background: var(--mg-card);
+            border: none;
+            border-radius: 1.2rem;
+            box-shadow: 0 8px 24px rgba(111, 66, 193, .1);
+            padding: 2rem;
+        }
+
+        .progress {
+            height: 8px;
+            border-radius: 1rem;
+            background-color: #e2d9f3;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--mg-purple), #9c6fe4);
+        }
+
+        /* Opciones de respuesta */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #f8f6ff;
+            border: 2px solid #e1dbf5;
+            border-radius: .8rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: .8rem;
+            font-weight: 500;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background: #eeeaff;
+            border-color: var(--mg-purple);
+            transform: translateX(4px);
+        }
+
+        /* Estados de validación */
+        .option-btn.correct {
+            background-color: #d1e7dd !important;
+            border-color: #a3cfbb !important;
+            color: #0f5132 !important;
+        }
+
+        .option-btn.incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #842029 !important;
+        }
+
+        .btn-mg {
+            background: var(--mg-purple);
+            color: #fff;
+            border: none;
+            border-radius: .6rem;
+            font-weight: 600;
+            padding: .6rem 1.5rem;
+        }
+
+        .btn-mg:hover {
+            background: var(--mg-purple-dark);
+            color: #fff;
+        }
+
+        /* Deshabilitar selección de texto */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg px-3 py-2 no-select">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="inicio.html">
+            <span style="font-size:1.8rem;line-height:1;">🧮</span>
+            <span>MathGo</span>
+        </a>
+        <div class="ms-auto">
+            <a class="nav-link" href="desafios.html"><i class="bi bi-arrow-left-short"></i> Volver a Desafíos</a>
+        </div>
+    </nav>
+
+    <div class="container px-3">
+        <div class="quiz-container">
+
+            <div id="quiz-card" class="card-quiz">
+                <div class="d-flex justify-content-between align-items-center mb-2 no-select">
+                    <span class="fw-bold text-muted" style="font-size: .85rem;" id="quiz-progress-text">Pregunta 1 de
+                        5</span>
+                    <span
+                        class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-2.5 py-1"
+                        style="font-size: 0.75rem;">+20 pts</span>
+                </div>
+
+                <div class="progress mb-4 no-select">
+                    <div class="progress-bar" id="quiz-progress-bar" role="progressbar" style="width: 20%"></div>
+                </div>
+
+                <h5 class="fw-bold text-dark mb-4" id="question-text">Cargando pregunta...</h5>
+
+                <div id="options-container">
+                </div>
+
+                <div class="text-end mt-4 d-none" id="next-container">
+                    <button class="btn btn-mg" id="btn-next" onclick="siguientePregunta()">
+                        Siguiente <i class="bi bi-arrow-right-short"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="result-card" class="card-quiz text-center d-none no-select">
+                <span style="font-size: 3.5rem;">🎯</span>
+                <h3 class="fw-bold text-dark mt-2 mb-1">¡Desafío Terminado!</h3>
+                <p class="text-muted small mb-4">Quiz: Pendientes y Rectas</p>
+
+                <div class="p-4 rounded-4 mb-4" style="background-color: #f8f6ff; border: 1px dashed #6f42c1;">
+                    <div class="display-3 fw-bold text-primary mb-1" id="result-percentage">0%</div>
+                    <p class="fw-semibold text-dark mb-2" id="result-feedback">¡Buen intento!</p>
+                    <div class="text-muted small" id="result-score">Respondiste bien 0 de 5 preguntas.</div>
+                </div>
+
+                <div class="d-flex gap-2 justify-content-center">
+                    <a href="desafios.html" class="btn btn-outline-secondary px-4 py-2 fw-semibold"
+                        style="border-radius: .6rem;">Salir</a>
+                    <button class="btn btn-mg px-4 py-2" onclick="reiniciarQuiz()">Intentar de nuevo</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════
+        //  BANCO DE PREGUNTAS
+        // ═══════════════════════════════════════════
+        const preguntas = [
+            {
+                enunciado: "¿Cuál es la pendiente de la recta que pasa por los puntos A(1, 2) y B(3, 6)?",
+                opciones: ["m = 1", "m = 2", "m = -2", "m = 4"],
+                correcta: 1 // Índice de "m = 2"
+            },
+            {
+                enunciado: "Si una recta tiene una pendiente m = -3, la recta es:",
+                opciones: ["Horizontal", "Vertical", "Creciente", "Decreciente"],
+                correcta: 3 // Índice de "Decreciente"
+            },
+            {
+                enunciado: "¿Cuál es la ecuación explícita de una recta con pendiente m = 4 y ordenada al origen b = -1?",
+                opciones: ["y = 4x - 1", "y = -1x + 4", "y = 4x + 1", "4x - y = 0"],
+                correcta: 0 // Índice de "y = 4x - 1"
+            },
+            {
+                enunciado: "¿Cómo son las pendientes de dos rectas que son perfectamente perpendiculares entre sí?",
+                opciones: ["Son exactamente iguales", "Su suma da cero (0)", "Son inversas y opuestas (su producto es -1)", "Una de las dos es siempre cero"],
+                correcta: 2
+            },
+            {
+                enunciado: "¿Cuál es la pendiente de una recta completamente horizontal?",
+                opciones: ["m = 1", "m = 0", "m es indefinida", "m = -1"],
+                correcta: 1 // Índice de "m = 0"
+            }
+        ];
+
+        let indicePreguntaActual = 0;
+        let respuestasCorrectas = 0;
+        let respondido = false;
+
+        // ═══════════════════════════════════════════
+        //  LOGICA DEL JUEGO
+        // ═══════════════════════════════════════════
+        function mostrarPregunta() {
+            respondido = false;
+            document.getElementById('next-container').classList.add('d-none');
+
+            const pregunta = preguntas[indicePreguntaActual];
+
+            // Actualizar textos y barra
+            document.getElementById('quiz-progress-text').textContent = `Pregunta ${indicePreguntaActual + 1} de ${preguntas.length}`;
+            const porcentajeProgreso = ((indicePreguntaActual + 1) / preguntas.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${porcentajeProgreso}%`;
+
+            document.getElementById('question-text').textContent = pregunta.enunciado;
+
+            // Renderizar botones de opciones
+            const containerOpciones = document.getElementById('options-container');
+            containerOpciones.innerHTML = '';
+
+            pregunta.opciones.forEach((opcion, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opcion;
+                btn.onclick = () => verificarRespuesta(index, btn);
+                containerOpciones.appendChild(btn);
+            });
+        }
+
+        function verificarRespuesta(indiceSeleccionado, botonClikeado) {
+            if (respondido) return; // Evita doble click
+            respondido = true;
+
+            const pregunta = preguntas[indicePreguntaActual];
+            const botones = document.querySelectorAll('.option-btn');
+
+            // Bloquear todos los botones
+            botones.forEach(btn => btn.disabled = true);
+
+            if (indiceSeleccionado === pregunta.correcta) {
+                botonClikeado.classList.add('correct');
+                respuestasCorrectas++;
+            } else {
+                botonClikeado.classList.add('incorrect');
+                // Mostrar visualmente cuál era la correcta
+                botones[pregunta.correcta].classList.add('correct');
+            }
+
+            // Mostrar botón para avanzar
+            document.getElementById('next-container').classList.remove('d-none');
+        }
+
+        function siguientePregunta() {
+            indicePreguntaActual++;
+
+            if (indicePreguntaActual < preguntas.length) {
+                mostrarPregunta();
+            } else {
+                mostrarResultados();
+            }
+        }
+
+        function mostrarResultados() {
+            // Ocultar bloque de preguntas y mostrar el de resultados
+            document.getElementById('quiz-card').classList.add('d-none');
+            document.getElementById('result-card').classList.remove('d-none');
+
+            // Calcular porcentaje
+            const porcentaje = Math.round((respuestasCorrectas / preguntas.length) * 100);
+            document.getElementById('result-percentage').textContent = `${porcentaje}%`;
+
+            // Feedback condicional personalizado
+            let feedback = "";
+            if (porcentaje === 100) feedback = "¡Excelente! Dominás las rectas a la perfección. 🏆";
+            else if (porcentaje >= 70) feedback = "¡Muy bien! Buen manejo de las pendientes. ⚡";
+            else if (porcentaje >= 40) feedback = "¡Vas por buen camino! Repasá los apuntes y volvé a intentar. 📚";
+            else feedback = "¡No te desanimes! La práctica hace al maestro. 💪";
+
+            document.getElementById('result-feedback').textContent = feedback;
+            document.getElementById('result-score').textContent = `Respondiste correctamente ${respuestasCorrectas} de ${preguntas.length} preguntas.`;
+        }
+
+        function reiniciarQuiz() {
+            indicePreguntaActual = 0;
+            respuestasCorrectas = 0;
+            document.getElementById('result-card').classList.add('d-none');
+            document.getElementById('quiz-card').classList.remove('d-none');
+            mostrarPregunta();
+        }
+
+        // Iniciar al cargar la página
+        document.addEventListener('DOMContentLoaded', mostrarPregunta);
+    </script>
+
+</body>
+
+</html>
