@@ -1,0 +1,25 @@
+/* Color del título y labels */
+h2 {
+  color: #3d1a78;
+}
+
+.form-label {
+  color: #6f42c1;
+  font-weight: 600;
+}
+
+/* Borde y sombra de los inputs al hacer foco */
+.form-control:focus {
+  border-color: #6f42c1;
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+/* Link iniciá sesión */
+a {
+  color: #6f42c1;
+  font-weight: 600;
+}
+
+a:hover {
+  color: #3d1a78;
+}

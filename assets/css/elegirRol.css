@@ -1,0 +1,31 @@
+/* Fondo púrpura igual al login */
+body {
+  background-color: #6f42c1;
+}
+
+/* Título */
+h2 {
+  color: #3d1a78;
+  font-weight: 700;
+}
+
+/* Cards de rol - efecto hover */
+.card-rol {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.card-rol:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(111, 66, 193, 0.3);
+}
+
+/* Link iniciá sesión */
+a {
+  color: #6f42c1;
+  font-weight: 600;
+}
+
+a:hover {
+  color: #3d1a78;
+}
