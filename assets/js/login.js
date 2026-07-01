@@ -23,7 +23,7 @@ async function handleLogin() {
   })
 
   if (verificacion) {
-    window.location.href = 'index.html'
+    window.location.href = 'inicio.html'
   }
   
 }
