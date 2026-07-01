@@ -1,4 +1,4 @@
-function handleLogin() {
+async function handleLogin() {
   const correo = document.getElementById("correo").value.trim();
   const contraseña = document.getElementById("contraseña").value.trim();
   const mensajeError = document.getElementById("mensajeError");
@@ -7,7 +7,25 @@ function handleLogin() {
     return;
   }
   mensajeError.classList.add("d-none");
-  alert("Bienvenido a MathGo");
+
+  const response = await fetch('http://localhost:3000/');
+
+  const data = await response.json();
+
+  console.log(data);
+
+  const verificacion = data.find(usuario => {
+    if (usuario.email === correo && usuario.pass === contraseña) {
+      return true;
+    }else{
+      mensajeError.classList.remove("d-none");
+    }
+  })
+
+  if (verificacion) {
+    window.location.href = 'index.html'
+  }
+  
 }
 function seleccionarRol(rol) {
   const btnEstudiante = document.getElementById("btnEstudiante");

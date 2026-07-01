@@ -12,25 +12,45 @@ function togglePasswordRegistro() {
     icono.classList.add("bi-eye-fill");
   }
 }
-function handleRegistro() {
+async function handleRegistro() {
   const nombre = document.getElementById("nombre").value.trim();
   const apellido = document.getElementById("apellido").value.trim();
-  const edad = document.getElementById("edad").value.trim();
+  const date = document.getElementById("date").value.trim();
   const telefono = document.getElementById("telefono").value.trim();
   const correo = document.getElementById("correo").value.trim();
   const contrasena = document.getElementById("contraseña").value.trim();
 
 
-  if (!nombre || !apellido || !edad || !telefono || !correo || !contrasena) {
+  if (!nombre || !apellido || !date || !telefono || !correo || !contrasena) {
     alert("⚠️ Completá todos los campos antes de continuar.");
     return;
   }
 
   // Verificar contraseña mínima
+  const user = {
+    name:nombre,
+    lastname:apellido,
+    email:correo,
+    phone:telefono,
+    pass:contrasena,
+    date:date,
+    rol:1
+  }
+
+  const response = await fetch('http://localhost:3000/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Esto es crucial
+        },
+        body: JSON.stringify(user)
+    });
+
+
   if (contrasena.length < 8) {
     alert("❌ La contraseña debe tener al menos 8 caracteres.");
     return;
   }
 
-  alert("✅ Cuenta creada correctamente.");
+  window.location.href = 'login.html'
+
 }
